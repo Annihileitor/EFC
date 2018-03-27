@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBVentaModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="DBVentaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categoria" EntityType="DBVentaModel.Categoria" />
+    <EntitySet Name="DetalleVenta" EntityType="DBVentaModel.DetalleVenta" />
+    <EntitySet Name="Estado" EntityType="DBVentaModel.Estado" />
+    <EntitySet Name="Local" EntityType="DBVentaModel.Local" />
+    <EntitySet Name="Producto" EntityType="DBVentaModel.Producto" />
+    <EntitySet Name="Rol" EntityType="DBVentaModel.Rol" />
+    <EntitySet Name="Usuario" EntityType="DBVentaModel.Usuario" />
+    <EntitySet Name="Venta" EntityType="DBVentaModel.Venta" />
+    <AssociationSet Name="FK_CategoriaProducto" Association="DBVentaModel.FK_CategoriaProducto">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductoDetalleVenta" Association="DBVentaModel.FK_ProductoDetalleVenta">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VentaDetalleVenta" Association="DBVentaModel.FK_VentaDetalleVenta">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstadoVenta" Association="DBVentaModel.FK_EstadoVenta">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LocalVenta" Association="DBVentaModel.FK_LocalVenta">
+      <End Role="Local" EntitySet="Local" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioRol" Association="DBVentaModel.FK_UsuarioRol">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioVenta" Association="DBVentaModel.FK_UsuarioVenta">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Venta" EntitySet="Venta" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipoCategoria" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Producto" Relationship="DBVentaModel.FK_CategoriaProducto" FromRole="Categoria" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="DetalleVenta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="total" Type="Int32" Nullable="false" />
+    <Property Name="Venta_id" Type="Int32" Nullable="false" />
+    <Property Name="Producto_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Producto" Relationship="DBVentaModel.FK_ProductoDetalleVenta" FromRole="DetalleVenta" ToRole="Producto" />
+    <NavigationProperty Name="Venta" Relationship="DBVentaModel.FK_VentaDetalleVenta" FromRole="DetalleVenta" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipoEstado" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Venta" Relationship="DBVentaModel.FK_EstadoVenta" FromRole="Estado" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Local">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="direccion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Venta" Relationship="DBVentaModel.FK_LocalVenta" FromRole="Local" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="precio" Type="Int32" Nullable="false" />
+    <Property Name="stock" Type="Int32" Nullable="false" />
+    <Property Name="detalle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Categoria_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Categoria" Relationship="DBVentaModel.FK_CategoriaProducto" FromRole="Producto" ToRole="Categoria" />
+    <NavigationProperty Name="DetalleVenta" Relationship="DBVentaModel.FK_ProductoDetalleVenta" FromRole="Producto" ToRole="DetalleVenta" />
+    <Property Type="String" Name="cod_producto" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipoRol" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Usuario" Relationship="DBVentaModel.FK_UsuarioRol" FromRole="Rol" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreusuario" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Rol_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Rol" Relationship="DBVentaModel.FK_UsuarioRol" FromRole="Usuario" ToRole="Rol" />
+    <NavigationProperty Name="Venta" Relationship="DBVentaModel.FK_UsuarioVenta" FromRole="Usuario" ToRole="Venta" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" />
+    <Property Name="Usuario_id" Type="Int32" Nullable="false" />
+    <Property Name="Local_id" Type="Int32" Nullable="false" />
+    <Property Name="Estado_id" Type="Int32" Nullable="false" />
+    <Property Name="codVenta" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="DetalleVenta" Relationship="DBVentaModel.FK_VentaDetalleVenta" FromRole="Venta" ToRole="DetalleVenta" />
+    <NavigationProperty Name="Estado" Relationship="DBVentaModel.FK_EstadoVenta" FromRole="Venta" ToRole="Estado" />
+    <NavigationProperty Name="Local" Relationship="DBVentaModel.FK_LocalVenta" FromRole="Venta" ToRole="Local" />
+    <NavigationProperty Name="Usuario" Relationship="DBVentaModel.FK_UsuarioVenta" FromRole="Venta" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_CategoriaProducto">
+    <End Role="Categoria" Type="DBVentaModel.Categoria" Multiplicity="1" />
+    <End Role="Producto" Type="DBVentaModel.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Categoria_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductoDetalleVenta">
+    <End Role="Producto" Type="DBVentaModel.Producto" Multiplicity="1" />
+    <End Role="DetalleVenta" Type="DBVentaModel.DetalleVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DetalleVenta">
+        <PropertyRef Name="Producto_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VentaDetalleVenta">
+    <End Role="Venta" Type="DBVentaModel.Venta" Multiplicity="1" />
+    <End Role="DetalleVenta" Type="DBVentaModel.DetalleVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DetalleVenta">
+        <PropertyRef Name="Venta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstadoVenta">
+    <End Role="Estado" Type="DBVentaModel.Estado" Multiplicity="1" />
+    <End Role="Venta" Type="DBVentaModel.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Estado_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LocalVenta">
+    <End Role="Local" Type="DBVentaModel.Local" Multiplicity="1" />
+    <End Role="Venta" Type="DBVentaModel.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Local">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Local_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioRol">
+    <End Role="Rol" Type="DBVentaModel.Rol" Multiplicity="1" />
+    <End Role="Usuario" Type="DBVentaModel.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Rol_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioVenta">
+    <End Role="Usuario" Type="DBVentaModel.Usuario" Multiplicity="1" />
+    <End Role="Venta" Type="DBVentaModel.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Venta">
+        <PropertyRef Name="Usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

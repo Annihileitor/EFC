@@ -1,0 +1,12 @@
+d:\Users\Leo\Documents\Visual Studio 2010\Projects\EFC2\EFC2\bin\EFC2.dll
+d:\Users\Leo\Documents\Visual Studio 2010\Projects\EFC2\EFC2\bin\EFC2.pdb
+d:\Users\Leo\Documents\Visual Studio 2010\Projects\EFC2\EFC2\obj\Debug\EFC2.dll
+d:\Users\Leo\Documents\Visual Studio 2010\Projects\EFC2\EFC2\obj\Debug\EFC2.pdb
+d:\Users\Leo\Documents\Visual Studio 2010\Projects\EFC2\EFC2\obj\Debug\EFC2.csprojResolveAssemblyReference.cache
+J:\s\EFC2\bin\EFC2.dll.config
+J:\s\EFC2\bin\EFC2.dll
+J:\s\EFC2\bin\EFC2.pdb
+J:\s\EFC2\obj\Debug\EFC2.csprojResolveAssemblyReference.cache
+J:\s\EFC2\obj\Debug\EFC2.csproj.CoreCompileInputs.cache
+J:\s\EFC2\obj\Debug\EFC2.dll
+J:\s\EFC2\obj\Debug\EFC2.pdb
